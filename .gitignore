@@ -11,6 +11,9 @@ build/
 # Environment
 .env
 
+# Type checking
+.mypy_cache/
+
 # IDE
 .idea/
 .vscode/
