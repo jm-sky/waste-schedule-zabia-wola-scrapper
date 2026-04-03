@@ -22,24 +22,12 @@ zabiawola_pl.py
 
 ## Etapy
 
-### Etap 1 — Rozpoznanie PDF (priorytet)
+### Etap 1 — Rozpoznanie PDF ✓ ZAKOŃCZONE
 
-**Cel:** Ustalić czy `pdftotext` wystarcza, czy potrzebne OCR.
+**Wynik:** `pdfplumber` wyciąga tekst poprawnie. OCR niepotrzebne.
 
-```bash
-pip install pdfminer.six  # lub pdfplumber
-pdftotext harmonogram2026.pdf -  # test CLI
-```
-
-**Decyzja:**
-- Tekst → `pdfminer.six` / `pdfplumber`
-- Grafika → `pdf2image` + `pytesseract` (ciężkie zależności, problem dla HACS)
-
-**Uwaga:** HACS ogranicza zależności — biblioteki OCR (Tesseract) nie są dostępne w środowisku HA.
-Jeśli tekst jest tylko graficzny, alternatywą jest:
-- Pre-processing poza HA (nie do zautomatyzowania)
-- Użycie zewnętrznego serwisu
-- Hardkodowanie danych na rok (nieoptymalne)
+**Problem:** Polskie znaki diakrytyczne zakodowane jako `(cid:XX)` (artefakt Adobe Illustrator).  
+**Decyzja:** Hardkodowana mapa `miejscowość → grupa (A–E)` — stabilna rok do roku, nie zależy od jakości kodowania PDF. Daty są w pełni czytelne (ASCII).
 
 ### Etap 2 — Scraper URL PDF
 
@@ -122,11 +110,12 @@ Jeśli tekst w PDF jest graficzny → konieczne przemyślenie podejścia lub zg�
 
 ## Harmonogram prac
 
-1. [ ] Pobrać PDF i zweryfikować ekstrakcję tekstu (`pdftotext` / `pdfplumber`)
-2. [ ] Zrozumieć strukturę tabeli w PDF
-3. [ ] Napisać scraper URL PDF
-4. [ ] Napisać parser PDF
-5. [ ] Napisać klasę `Source` + `TEST_CASES`
-6. [ ] Napisać dokumentację `zabiawola_pl.md`
-7. [ ] Napisać testy `test_zabiawola_pl.py`
-8. [ ] Fork + PR do `mampfes/hacs_waste_collection_schedule`
+1. [x] Pobrać PDF i zweryfikować ekstrakcję tekstu (`pdfplumber`)
+2. [x] Zrozumieć strukturę tabeli w PDF (5 grup A–E, typy odpadów, wiersze z datami)
+3. [ ] Ręcznie przypisać wszystkie miejscowości/ulice do grup A–E (weryfikacja danych w PDF)
+4. [ ] Napisać scraper URL PDF (scrapowanie strony gminy)
+5. [ ] Napisać parser dat z tabeli PDF
+6. [ ] Napisać klasę `Source` + `TEST_CASES`
+7. [ ] Napisać dokumentację `zabiawola_pl.md`
+8. [ ] Napisać testy `test_zabiawola_pl.py`
+9. [ ] Fork + PR do `mampfes/hacs_waste_collection_schedule`
