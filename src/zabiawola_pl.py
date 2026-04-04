@@ -52,8 +52,8 @@ _COLUMN_BOUNDS: dict[str, tuple[float, float]] = {
     "A": (0.0, 170.0),
     "B": (170.0, 340.0),
     "C": (340.0, 493.0),
-    "D": (493.0, 660.0),
-    "E": (660.0, 9999.0),
+    "D": (493.0, 650.0),   # x: 493–634 (ostatnia data D w wierszach Q4 na x≈624)
+    "E": (650.0, 9999.0),  # x: 656–803
 }
 
 # Granice sekcji (y) wyznaczone empirycznie.
