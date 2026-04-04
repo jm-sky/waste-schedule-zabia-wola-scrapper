@@ -4,6 +4,11 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP"]  # pycodestyle, pyflakes, isort, pyupgrade
 
+[tool.pytest.ini_options]
+markers = [
+    "integration: testy wymagające dostępu do sieci (deselect with '-m not integration')",
+]
+
 [tool.mypy]
 python_version = "3.12"
 strict = true
